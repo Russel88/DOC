@@ -9,13 +9,13 @@
 #' @export
 DOC.null <- function(otu,N=1,non.zero=TRUE,...){
   
-  docs <- foreach(i = 1:N,.options.snow = opts) %do% {
+  docs <- foreach(i = 1:N) %do% {
     
     # Make NULL
     otunull <- as.data.frame(DOC.otunull(otu,non.zero=non.zero))
     
     # Run DOC
-    doc <- DOC(outnull, ...)
+    doc <- DOC(otunull, ...)
     
     return(doc)
   }
