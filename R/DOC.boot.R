@@ -3,6 +3,7 @@
 #' @param do Output from \code{DOC.do} function
 #' @param R Number of bootstraps
 #' @param subr If NULL will do bootstrap, alternatively an integer denoting size of subsample
+#' @param pair A vector of length two with names of pairs
 #' @param mov.avg Moving average window to use for estimating where negative slope starts
 #' @param span Span of loess smoothing
 #' @param degree Degree of loess smoothing (If 1 linear, >1 polynomial)
@@ -20,7 +21,7 @@
 #' @import foreach snow doSNOW lme4
 #' @export
 
-DOC.boot <- function(do,R=100,subr=NULL,mov.avg=5,span=0.2,degree=1,family="symmetric",iterations=4,surface="interpolate",cores=1){
+DOC.boot <- function(do,R=100,subr=NULL,pair=NULL,mov.avg=5,span=0.2,degree=1,family="symmetric",iterations=4,surface="interpolate",cores=1){
   
   # Subset and margin names
   OL <- do[[1]]
@@ -51,23 +52,44 @@ DOC.boot <- function(do,R=100,subr=NULL,mov.avg=5,span=0.2,degree=1,family="symm
   
   llboot <- foreach(i = 1:R,.options.snow = opts, .export = "mov.avg") %dopar% {
     
-    # Sample subjects
-    if(is.null(subr)){
-      Samp <- sample(rownames(OL),replace=TRUE)
+    if(is.null(pair)){
+      
+      # Sample subjects
+      if(is.null(subr)){
+        Samp <- sample(rownames(OL),replace=TRUE)
+      } else {
+        Samp <- sample(rownames(OL),subr,replace=FALSE)
+      }
+      
+      # Subset
+      OL.sub <- OL[Samp,Samp] 
+      DIS.sub <- DIS[Samp,Samp]
+      
+      # Vectorize
+      OL.tri <- OL.sub[upper.tri(OL.sub)]
+      DIS.tri <- DIS.sub[upper.tri(DIS.sub)]
+      
     } else {
-      Samp <- sample(rownames(OL),subr,replace=FALSE)
+      
+      # Sample subjects
+      if(is.null(subr)){
+        Sampr <- sample(rownames(OL),replace=TRUE)
+        Sampc <- sample(colnames(OL),replace=TRUE)
+      } else {
+        Sampr <- sample(rownames(OL),subr,replace=FALSE)
+        Sampc <- sample(colnames(OL),subr,replace=FALSE)
+      }
+      
+      
+      # Subset
+      OL.sub <- OL[Sampr,Sampc] 
+      DIS.sub <- DIS[Sampr,Sampc]
+      
+      # Vectorize
+      OL.tri <- as.numeric(OL.sub)
+      DIS.tri <- as.numeric(DIS.sub)
+      
     }
-      
-    # Subset
-    OL.sub <- OL[Samp,Samp] 
-    DIS.sub <- DIS[Samp,Samp]
-      
-    # Vectorize
-    OL.tri <- OL.sub[upper.tri(OL.sub)]
-    DIS.tri <- DIS.sub[upper.tri(DIS.sub)]
-      
-    OL.tri <- OL.tri[!is.na(OL.tri)]
-    DIS.tri <- DIS.tri[!is.na(DIS.tri)]
     
     # To data frame
     DF.l <- data.frame(y=c(DIS.tri),x=c(OL.tri)) 

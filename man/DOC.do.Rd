@@ -4,10 +4,12 @@
 \alias{DOC.do}
 \title{Dissimilarity and Overlap}
 \usage{
-DOC.do(otu)
+DOC.do(otu, pair = NULL)
 }
 \arguments{
 \item{otu}{Normalized otu-table (taxa as rows and samples sum to 1)}
+
+\item{pair}{A vector of length two with names of pairs mathcing colnames in \code{otu}}
 }
 \value{
 A list with; a matrix of Overlap, a matrix of rJSD (Dissimilarities), and a dataframe with Overlap and rJSD as vectors

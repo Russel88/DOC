@@ -1,10 +1,11 @@
 #' Dissimilarity and Overlap
 #'
 #' @param otu Normalized otu-table (taxa as rows and samples sum to 1)
+#' @param pair A vector of length two with names of pairs mathcing colnames in \code{otu}
 #' @return A list with; a matrix of Overlap, a matrix of rJSD (Dissimilarities), and a dataframe with Overlap and rJSD as vectors
 #' @export
 
-DOC.do <- function(otu){
+DOC.do <- function(otu, pair = NULL){
   
   Samples <- ncol(otu)
   
@@ -36,6 +37,31 @@ DOC.do <- function(otu){
     }
   }
   
+  if(!is.null(pair)) {
+    
+    pairv <- colnames(otu)
+    pairv <- gsub(paste0(".*",pair[1],".*"), pair[1], pairv)
+    pairv <- gsub(paste0(".*",pair[2],".*"), pair[2], pairv)
+    if(length(unique(pairv)) != 2) {
+      stop("Names of pairs do not match column names")
+    }
+    
+    rownames(Mat.Overlap) <- pairv
+    colnames(Mat.Overlap) <- pairv
+    Mat.Overlap <- Mat.Overlap[rownames(Mat.Overlap) %in% pair[1],colnames(Mat.Overlap) %in% pair[2]]
+    
+    rownames(Mat.rJSD) <- pairv
+    colnames(Mat.rJSD) <- pairv
+    Mat.rJSD <- Mat.rJSD[rownames(Mat.rJSD) %in% pair[1],colnames(Mat.rJSD) %in% pair[2]]
+    
+    DF.list <- list(Mat.Overlap,Mat.rJSD)
+    DF <- data.frame(Overlap=c(DF.list[[1]]),rJSD=c(DF.list[[2]]))
+    DF <- DF[!is.na(DF$Overlap),]
+    
+    List <- list(Mat.Overlap,Mat.rJSD,DF)
+    
+  } else {
+    
     DF.list <- list(Mat.Overlap,Mat.rJSD)
     DF <- data.frame(Overlap=c(DF.list[[1]]),rJSD=c(DF.list[[2]]))
     DF <- DF[!is.na(DF$Overlap),]
@@ -55,6 +81,8 @@ DOC.do <- function(otu){
     diag(Mat.rJSD.new) <- NA
     
     List <- list(Mat.Overlap.new,Mat.rJSD.new,DF)
+    
+  }
     
   return(List)
 }

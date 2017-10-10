@@ -9,7 +9,7 @@ DOC.null(otu, N = 1, non.zero = TRUE, ...)
 \arguments{
 \item{otu}{An OTU-table (taxa as rows)}
 
-\item{N}{Number of null models. Is 1 by default as in the orignal paper.}
+\item{N}{Number of null models. Is 1 by default as in the orignal Nature paper.}
 
 \item{non.zero}{Shuffle only non-zero (TRUE) or all values (FALSE)}
 

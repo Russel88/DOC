@@ -1,10 +1,11 @@
 #' Wrapper to run a DOC analysis with null models
 #'
 #' @param otu An OTU-table (taxa as rows)
-#' @param N Number of null models. Is 1 by default as in the orignal paper.
+#' @param N Number of null models. Is 1 by default as in the orignal Nature paper.
 #' @param non.zero Shuffle only non-zero (TRUE) or all values (FALSE)
 #' @param ... Arguments for the \code{DOC} function
 #' @return A list with results from \code{DOC} function. One element for each N
+#' @import foreach
 #' @export
 DOC.null <- function(otu,N=1,non.zero=TRUE,...){
   

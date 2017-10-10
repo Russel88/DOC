@@ -4,8 +4,8 @@
 \alias{DOC.boot}
 \title{Bootstraps for loess, negative slope and fns}
 \usage{
-DOC.boot(do, R = 100, subr = NULL, mov.avg = 5, span = 0.2,
-  degree = 1, family = "symmetric", iterations = 4,
+DOC.boot(do, R = 100, subr = NULL, pair = NULL, mov.avg = 5,
+  span = 0.2, degree = 1, family = "symmetric", iterations = 4,
   surface = "interpolate", cores = 1)
 }
 \arguments{
@@ -14,6 +14,8 @@ DOC.boot(do, R = 100, subr = NULL, mov.avg = 5, span = 0.2,
 \item{R}{Number of bootstraps}
 
 \item{subr}{If NULL will do bootstrap, alternatively an integer denoting size of subsample}
+
+\item{pair}{A vector of length two with names of pairs}
 
 \item{mov.avg}{Moving average window to use for estimating where negative slope starts}
 
