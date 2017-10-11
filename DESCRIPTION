@@ -1,6 +1,6 @@
 Package: DOC
 Title: DOC analysis of microbial communities
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: person("Jakob", "Russel", email = "russel2620@gmail.com", role = c("aut", "cre"))
 Description: This is an implementation of the DOC analysis proposed by Bashan et al. 2016 Universality of human microbial dynamics. Nature 534.
 Depends: R (>= 3.2.5)

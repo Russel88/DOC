@@ -63,6 +63,7 @@ DOC <- function(otu,R=100,subr=NULL,pair=NULL,mov.avg=5,ci=c(0.025,0.5,0.975),sp
   
   # Final
   Final <- list(DO=Dis.Over[[3]],LME=LME,LOWESS=LOWESS,NEG=NEG,FNS=FNS,BOOT=Bootstrap[[1]],CI=LCIS)
+  Final <- lapply(Final, function(k) data.frame(k, Data = "Real")) 
   class(Final) <- "DOC"
   return(Final)
   

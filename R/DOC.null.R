@@ -15,15 +15,44 @@ DOC.null <- function(otu,N=1,non.zero=TRUE,...){
     otunull <- as.data.frame(DOC.otunull(otu,non.zero=non.zero))
     
     # Run DOC
-    doc <- DOC(otunull, R=3,cores=3)
+    doc <- DOC(otunull, ...)
     
     return(doc)
   }
   
-  names(docs) <- paste0("NULL.",1:N)
+  names(docs) <- paste0("Null.",1:N)
 
-  doc.final <- DOC.merge(docs)
+  new.x <- list()
+  for(i in 1:length(docs)){
+    sub <- docs[[i]]
+    subs <- list()
+    for(j in 1:length(sub)){
+      sub.sub <- sub[[j]]
+      sub.sub$Data <- names(docs)[i]
+      subs[[j]] <- sub.sub
+    }
+    names(subs) <- c("DO","LME","LOWESS","NEG","FNS","BOOT","CI")
+    new.x[[i]] <- subs
+  }
   
-  return(doc.final)
+  DOs <- do.call(rbind,lapply(new.x, function(k) k$DO))
+  LMEs <- do.call(rbind,lapply(new.x, function(k) k$LME))
+  LOWESSs <- do.call(rbind,lapply(new.x, function(k) k$LOWESS))
+  NEGs <- do.call(rbind,lapply(new.x, function(k) k$NEG))
+  FNSs <- do.call(rbind,lapply(new.x, function(k) k$FNS))
+  BOOTs <- do.call(rbind,lapply(new.x, function(k) k$BOOT))
+  CIs <- do.call(rbind,lapply(new.x, function(k) k$CI))
+  
+  final <- list(DO = DOs,
+                LME = LMEs,
+                LOWESS = LOWESSs,
+                NEG = NEGs,
+                FNS = FNSs,
+                BOOT = BOOTs,
+                CI = CIs)
+  
+  class(final) <- "DOC"
+  
+  return(final)
 } 
 
