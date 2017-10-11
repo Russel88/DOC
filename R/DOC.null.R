@@ -15,10 +15,15 @@ DOC.null <- function(otu,N=1,non.zero=TRUE,...){
     otunull <- as.data.frame(DOC.otunull(otu,non.zero=non.zero))
     
     # Run DOC
-    doc <- DOC(otunull, ...)
+    doc <- DOC(otunull, R=3,cores=3)
     
     return(doc)
   }
   
-  return(docs)
+  names(docs) <- paste0("NULL.",1:N)
+
+  doc.final <- DOC.merge(docs)
+  
+  return(doc.final)
 } 
+

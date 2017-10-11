@@ -15,6 +15,8 @@ DOC(otu, R = 100, subr = NULL, pair = NULL, mov.avg = 5, ci = c(0.025,
 
 \item{subr}{If NULL will do bootstrap, alternatively an integer denoting size of subsample}
 
+\item{pair}{A vector of length two with names of pairs mathcing colnames in \code{otu}}
+
 \item{mov.avg}{Moving average window to use for estimating where negative slope starts}
 
 \item{ci}{Vector with quantiles for confidence intervals}

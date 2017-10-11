@@ -3,6 +3,7 @@
 #' @param otu An OTU-table (taxa as rows)
 #' @param R Number of bootstraps
 #' @param subr If NULL will do bootstrap, alternatively an integer denoting size of subsample
+#' @param pair A vector of length two with names of pairs mathcing colnames in \code{otu}
 #' @param mov.avg Moving average window to use for estimating where negative slope starts
 #' @param ci Vector with quantiles for confidence intervals
 #' @param span Span of loess smoothing
