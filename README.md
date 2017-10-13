@@ -31,7 +31,12 @@ The vertical line is the median Fns value from the bootstraps
 
     results.null <- DOC.null(otu)
 
-### Merge two DOC objects, and plot the whole thing
+### Merge two or more DOC objects, and plot the whole thing
 
-    merged <- DOC.merge(list(real = results, null = results.null))
+    # The names (res1, res2, and res3) will appear in the plot
+    merged <- DOC.merge(list(res1 = results1, res2 = results2, res3 = results3))
+    plot(merged)
+
+    # If you merge a "real"" analysis with a "null" give them the same name:
+    merged <- DOC.merge(list(MyResults = results, MyResults = results.null))
     plot(merged)
