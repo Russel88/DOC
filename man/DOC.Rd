@@ -4,9 +4,10 @@
 \alias{DOC}
 \title{A wrapper to run the whole DOC analysis}
 \usage{
-DOC(otu, R = 100, subr = NULL, pair = NULL, mov.avg = 5, ci = c(0.025,
-  0.5, 0.975), span = 0.2, degree = 1, family = "symmetric",
-  iterations = 4, surface = "interpolate", cores = 1)
+DOC(otu, R = 100, subr = NULL, pair = NULL, mov.avg = 5,
+  ci = c(0.025, 0.5, 0.975), span = 0.2, degree = 1,
+  family = "symmetric", iterations = 4, surface = "interpolate",
+  cores = 1)
 }
 \arguments{
 \item{otu}{An OTU-table (taxa as rows)}

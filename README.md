@@ -1,3 +1,6 @@
+[![Travis Build
+Status](https://travis-ci.org/Russel88/DOC.svg?branch=master)](https://travis-ci.org/Russel88/DOC)
+
 DOC: Dissimilarity Overlap Curve analysis
 =========================================
 

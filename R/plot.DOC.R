@@ -1,11 +1,14 @@
 #' Plot results from DOC analysis
 #'
 #' @param x Output from \code{DOC} function
+#' @param ... Unused argument
+#' @import ggplot2
 #' @export
-plot.DOC <- function(x){
+plot.DOC <- function(x, ...){
   
-  library(ggplot2)
-  
+  # For R CMD Check
+  Overlap <- Neg.Slope <- ..scaled.. <- NULL
+
   if("Name" %in% colnames(x$DO)){
   
     x$nm <- aggregate(Neg.Slope ~ Data + Name, data = x$NEG, median)

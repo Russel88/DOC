@@ -4,6 +4,8 @@
 #' @param x,y Numeric vectors
 #' @keywords rJSD divergence dissimilarity
 #' @return A numeric
+#' @import stats
+#' @import utils
 #' @export
 
 DOC.rjsd <- function(x,y){

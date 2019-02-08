@@ -50,6 +50,7 @@ DOC.boot <- function(do,R=100,subr=NULL,pair=NULL,mov.avg=5,span=0.2,degree=1,fa
   progress <- function(n) setTxtProgressBar(pb, n)
   opts <- list(progress = progress)
   
+  i <- NULL
   llboot <- foreach(i = 1:R,.options.snow = opts, .export = "mov.avg") %dopar% {
     
     if(is.null(pair)){

@@ -4,10 +4,12 @@
 \alias{plot.DOC}
 \title{Plot results from DOC analysis}
 \usage{
-\method{plot}{DOC}(x)
+\method{plot}{DOC}(x, ...)
 }
 \arguments{
 \item{x}{Output from \code{DOC} function}
+
+\item{...}{Unused argument}
 }
 \description{
 Plot results from DOC analysis

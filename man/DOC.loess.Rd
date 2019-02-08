@@ -4,8 +4,8 @@
 \alias{DOC.loess}
 \title{Calculate loess on the real data}
 \usage{
-DOC.loess(do, pair = NULL, span = 0.2, degree = 1, family = "symmetric",
-  iterations = 4, surface = "interpolate")
+DOC.loess(do, pair = NULL, span = 0.2, degree = 1,
+  family = "symmetric", iterations = 4, surface = "interpolate")
 }
 \arguments{
 \item{do}{Output from DO function}
