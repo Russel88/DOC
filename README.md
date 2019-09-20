@@ -41,7 +41,7 @@ The input is an OTU-table with taxa as rows
 
     plot(results)
 
-The vertical line is the median Fns value from the bootstraps
+The vertical line is the median Overlap at which the fitted line has a negative slope.
 
 ### DOC for null model
 
